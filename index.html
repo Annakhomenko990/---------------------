@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Мозок під мікроскопом</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Стартове вікно -->
+  <div id="intro" class="intro-screen" aria-hidden="false">
+    <div class="intro-inner">
+      <h1>Мозок під мікроскопом</h1>
+      <p class="lead">Візуалізація, статті та освітні матеріали про мозок.</p>
+      <button id="startBtn" class="btn">Дізнатися більше</button>
+    </div>
+  </div>
+
+  <!-- Весь сайт ховаємо поки не натиснуть кнопку -->
+  <div id="siteContent" aria-hidden="true">
+    <header class="site-header">
+      <div class="container">
+        <a class="logo" href="#">Мозок під мікроскопом</a>
+        <button id="navToggle" class="nav-toggle" aria-label="Меню">☰</button>
+        <nav id="mainNav" class="nav">
+          <a href="#about">Проєкт</a>
+          <a href="#gallery">Галерея</a>
+          <a href="#articles">Статті</a>
+          <a href="#contact">Контакт</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="about" class="container about">
+        <h2>Проєкт</h2>
+        <p>🧠 Мозок під мікроскопом — це інтерактивний освітній проєкт, який у простій і захопливій формі показує, як працює людський мозок. Досліджуй, як він керує емоціями, пам’яттю, креативністю та навчанням. Зазирни у світ нейронауки, проходь інтерактивні тести й відкрий, як мислиш саме ти!</p>
+      </section>
+
+      <section id="gallery" class="container gallery">
+        <h2>Галерея</h2>
+        <div class="grid" id="galleryGrid">
+          <figure class="card"><img src="assets/images/thumb1.jpg" alt="Зображення 1" data-full="assets/images/full1.jpg"><figcaption>Зображення 1</figcaption></figure>
+          <figure class="card"><img src="assets/images/thumb2.jpg" alt="Зображення 2" data-full="assets/images/full2.jpg"><figcaption>Зображення 2</figcaption></figure>
+          <figure class="card"><img src="assets/images/thumb3.jpg" alt="Зображення 3" data-full="assets/images/full3.jpg"><figcaption>Зображення 3</figcaption></figure>
+        </div>
+      </section>
+
+      <section id="articles" class="container articles">
+        <h2>Статті</h2>
+        <article>
+          <h3>Назва статті</h3>
+          <p>Короткий анонс статті з посиланням на повний текст.</p>
+        </article>
+      </section>
+
+      <section id="contact" class="container contact">
+        <h2>Контакт</h2>
+        <p>Напишіть нам: <a href="mailto:info@example.com">info@example.com</a></p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <small>© 2025 Мозок під мікроскопом</small>
+      </div>
+    </footer>
+
+    <!-- Модал для перегляду зображень -->
+    <div id="imgModal" class="modal" aria-hidden="true">
+      <button id="modalClose" class="modal-close" aria-label="Закрити">×</button>
+      <img id="modalImg" src="" alt="">
+      <p id="modalCaption"></p>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

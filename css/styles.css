@@ -1,0 +1,130 @@
+/* ...existing code... */
+:root{
+  /* Палітра (зліва направо: темний, сірий, dusty rose, soft rose, pale pink, off-white) */
+  --charcoal: #5A585C;
+  --slate:    #8D8F94;
+  --dusty:    #D6AEB1;
+  --soft-rose:#E9CFCF;
+  --pale:     #FAEDEE;
+  --offwhite: #F1F3F5;
+
+  --bg: var(--offwhite);
+  --surface: #ffffff;
+  --text: var(--charcoal);
+  --muted: var(--slate);
+  --accent: var(--dusty);
+  --accent-2: var(--soft-rose);
+
+  --max-width:1100px;
+  --gap:1rem;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  color:var(--text);
+  background: linear-gradient(180deg, var(--pale) 0%, var(--bg) 100%);
+  line-height:1.45;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.container{max-width:var(--max-width);margin:0 auto;padding:1rem}
+
+/* Header */
+.site-header{
+  background: linear-gradient(90deg, rgba(255,255,255,0.6), var(--surface));
+  border-bottom:1px solid rgba(90,88,92,0.06);
+  position:sticky;top:0;z-index:20;
+  backdrop-filter: blur(6px);
+}
+.site-header .container{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo{
+  font-weight:700;
+  text-decoration:none;
+  color:var(--charcoal);
+  font-size:1.05rem;
+}
+.nav{display:flex;gap:1rem;align-items:center}
+.nav a{
+  text-decoration:none;
+  color:var(--muted);
+  padding:0.5rem;
+  border-radius:6px;
+  transition:color .18s, background .18s, transform .08s;
+}
+.nav a:hover{color:var(--charcoal);background:rgba(214,174,177,0.08);transform:translateY(-1px)}
+.nav-toggle{display:none;background:none;border:0;font-size:1.6rem;color:var(--charcoal)}
+
+/* Hero */
+.hero{
+  padding:3.2rem 0;
+  text-align:center;
+  background: linear-gradient(180deg, rgba(217,187,190,0.12) 0%, transparent 60%);
+}
+.hero h1{margin:0 0 .4rem;color:var(--charcoal);font-size:2.1rem}
+.hero p{margin:0 0 1rem;color:var(--muted)}
+.btn{
+  display:inline-block;
+  background:var(--accent);
+  color:#fff;
+  padding:0.6rem 1rem;
+  border-radius:8px;
+  text-decoration:none;
+  box-shadow:0 6px 18px rgba(214,174,177,0.12);
+}
+
+/* Sections */
+.container > h2{color:var(--charcoal);margin-top:0}
+.about, .articles, .contact{padding:2rem 1rem}
+.gallery{padding:1.5rem 1rem}
+
+/* Gallery grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem}
+.card{background:var(--surface);border-radius:8px;overflow:hidden;box-shadow:0 6px 18px rgba(20,20,20,0.04)}
+.card img{display:block;width:100%;height:160px;object-fit:cover;cursor:pointer;transition:transform .22s}
+.card img:hover{transform:scale(1.03)}
+.card figcaption{padding:.6rem .8rem;color:var(--muted);font-size:.95rem}
+
+/* Footer */
+.site-footer{padding:1rem 0;background:transparent;border-top:1px solid rgba(90,88,92,0.04);color:var(--muted)}
+.site-footer small{display:block;text-align:center}
+
+/* Modal */
+.modal{
+  position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(180deg, rgba(233,207,207,0.12), rgba(241,243,245,0.85));
+  padding:2rem;gap:1rem;opacity:0;pointer-events:none;transition:opacity .18s;
+}
+.modal[aria-hidden="false"]{opacity:1;pointer-events:auto}
+.modal img{max-width:90%;max-height:80vh;border-radius:8px;box-shadow:0 10px 40px rgba(20,20,20,0.3)}
+.modal-close{position:fixed;right:1.2rem;top:1.2rem;background:var(--surface);border:0;padding:.4rem .6rem;border-radius:6px;font-size:1.4rem;cursor:pointer;box-shadow:0 6px 18px rgba(20,20,20,0.06)}
+
+/* Responsive */
+@media (max-width:800px){
+  .nav{position:absolute;left:0;right:0;top:64px;background:var(--pale);flex-direction:column;padding:.5rem;border-bottom:1px solid rgba(90,88,92,0.04);display:none}
+  .nav.show{display:flex}
+  .nav-toggle{display:block}
+  .hero h1{font-size:1.6rem}
+}
+
+/* Small UI tweaks using palette */
+a, a:visited{color:var(--accent)}
+small{color:var(--muted)}
+
+/* Додаємо стилі для стартового екрану та видимості сайту */
+.intro-screen{
+  position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(180deg, rgba(217,187,190,0.14), rgba(241,243,245,0.95));
+  z-index:40;padding:2rem;text-align:center;
+}
+.intro-inner{max-width:720px;padding:2rem;border-radius:12px;background:rgba(255,255,255,0.75);backdrop-filter:blur(6px)}
+.intro-screen h1{margin:0 0 .5rem;color:var(--charcoal);font-size:2.2rem}
+.intro-screen .lead{margin:0 0 1rem;color:var(--muted)}
+#siteContent[aria-hidden="true"]{display:none}
+#siteContent[aria-hidden="false"]{display:block}
+
+/* Невелике згладжування при хованні */
+.intro-screen.hidden{opacity:0;transform:scale(.995);transition:opacity .25s, transform .25s;pointer-events:none}
