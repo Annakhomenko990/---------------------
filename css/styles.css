@@ -1,4 +1,3 @@
-/* ...existing code... */
 :root{
   /* Палітра (зліва направо: темний, сірий, dusty rose, soft rose, pale pink, off-white) */
   --charcoal: #5A585C;
@@ -76,6 +75,67 @@ body{
   box-shadow:0 6px 18px rgba(214,174,177,0.12);
 }
 
+/* Hero Block */
+.hero-block {
+  position: relative;
+  width: 100%;
+  min-height: 340px;
+  background: linear-gradient(180deg, var(--soft-rose) 0%, var(--offwhite) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+.petals-bg {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 120%;
+  pointer-events: none;
+  z-index: 1;
+  background: url('assets/images/622a88dd3c38785a05df91fdc3eb08cf.jpg') center top no-repeat;
+  background-size: cover;
+  opacity: 1;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 2rem 1.5rem;
+  background: rgba(255,255,255,0.85);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(214,174,177,0.10);
+  text-align: center;
+}
+.hero-content h1 {
+  font-size: 2.3rem;
+  color: var(--charcoal);
+  margin-bottom: 1.2rem;
+  font-weight: 700;
+}
+.hero-content .lead {
+  font-size: 1.15rem;
+  color: var(--muted);
+  margin-bottom: 0;
+  line-height: 1.7;
+}
+
+/* Анімація падіння пелюсток */
+.petal {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  pointer-events: none;
+  opacity: 0.85;
+  animation: fall-petal 7s linear infinite;
+}
+@keyframes fall-petal {
+  0% { transform: translateY(-60px) rotate(0deg); opacity: 0.9; }
+  80% { opacity: 0.85; }
+  100% { transform: translateY(380px) rotate(360deg); opacity: 0.2; }
+}
+
 /* Sections */
 .container > h2{color:var(--charcoal);margin-top:0}
 .about, .articles, .contact{padding:2rem 1rem}
@@ -87,6 +147,61 @@ body{
 .card img{display:block;width:100%;height:160px;object-fit:cover;cursor:pointer;transition:transform .22s}
 .card img:hover{transform:scale(1.03)}
 .card figcaption{padding:.6rem .8rem;color:var(--muted);font-size:.95rem}
+
+/* Articles grid */
+.articles-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+.article-card {
+  background: var(--surface);
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(214,174,177,0.10);
+  padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+  min-width: 220px;
+  max-width: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: box-shadow .18s, transform .18s;
+  flex: 0 0 auto;
+}
+.article-card:hover {
+  box-shadow: 0 10px 32px rgba(214,174,177,0.18);
+  transform: translateY(-2px) scale(1.03);
+}
+.article-card h3 {
+  margin: 0 0 .6rem 0;
+  font-size: 1.15rem;
+  color: var(--charcoal);
+}
+.article-card p {
+  margin: 0 0 1.1rem 0;
+  color: var(--muted);
+  font-size: 1rem;
+}
+.read-more {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(214,174,177,0.10);
+  transition: background .18s;
+  margin-top: auto;
+}
+.read-more:hover {
+  background: var(--accent-2);
+  color: var(--charcoal);
+}
 
 /* Footer */
 .site-footer{padding:1rem 0;background:transparent;border-top:1px solid rgba(90,88,92,0.04);color:var(--muted)}
@@ -102,12 +217,108 @@ body{
 .modal img{max-width:90%;max-height:80vh;border-radius:8px;box-shadow:0 10px 40px rgba(20,20,20,0.3)}
 .modal-close{position:fixed;right:1.2rem;top:1.2rem;background:var(--surface);border:0;padding:.4rem .6rem;border-radius:6px;font-size:1.4rem;cursor:pointer;box-shadow:0 6px 18px rgba(20,20,20,0.06)}
 
+#articleModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+#articleModal[aria-hidden="false"] {
+  display: flex;
+}
+.modal-content {
+  background: #fff;
+  color: #222;
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  max-height: none;
+  overflow-y: auto;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+#articleClose.modal-close {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  right: auto;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 1.7rem;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(214,174,177,0.10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+#articleClose.modal-close::before {
+  content: '\2190'; /* Стрілка вліво */
+  font-size: 1.7rem;
+  color: #fff;
+}
+#articleClose.modal-close span {
+  display: none;
+}
+#articleClose.modal-close:hover {
+  background: var(--accent-2);
+  color: var(--charcoal);
+}
+
+#articleTitle {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+#articleBody {
+  font-size: 1rem;
+  line-height: 1.7;
+  white-space: pre-line;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: left;
+}
+
 /* Responsive */
 @media (max-width:800px){
   .nav{position:absolute;left:0;right:0;top:64px;background:var(--pale);flex-direction:column;padding:.5rem;border-bottom:1px solid rgba(90,88,92,0.04);display:none}
   .nav.show{display:flex}
   .nav-toggle{display:block}
   .hero h1{font-size:1.6rem}
+}
+
+@media (max-width: 900px) {
+  .articles-grid {
+    flex-direction: row;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+  }
+  .article-card {
+    min-width: 200px;
+    max-width: 80vw;
+  }
 }
 
 /* Small UI tweaks using palette */
@@ -122,7 +333,7 @@ small{color:var(--muted)}
 }
 .intro-inner{max-width:720px;padding:2rem;border-radius:12px;background:rgba(255,255,255,0.75);backdrop-filter:blur(6px)}
 .intro-screen h1{margin:0 0 .5rem;color:var(--charcoal);font-size:2.2rem}
-.intro-screen .lead{margin:0 0 1rem;color:var(--muted)}
+.intro-screen .lead{margin:0 0 1рем;color:var(--muted)}
 #siteContent[aria-hidden="true"]{display:none}
 #siteContent[aria-hidden="false"]{display:block}
 
